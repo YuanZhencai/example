@@ -42,7 +42,7 @@ public class MessageBean implements Serializable {
 
 	public void sendMessages() {
 		System.out.println("MessageBean.sendMessages()");
-		exportButtonRender = false;
+//		exportButtonRender = false;
 		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "bean:", "complete");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 
@@ -64,7 +64,7 @@ public class MessageBean implements Serializable {
 
 	public void complete() {
 		System.out.println("MessageBean.complete()");
-		exportButtonRender = true;
+//		exportButtonRender = true;
 		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "打包成功：", "请到下载页面下载");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}

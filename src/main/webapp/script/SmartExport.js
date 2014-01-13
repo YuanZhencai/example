@@ -1,42 +1,42 @@
+//全局intervalID
 var intervalID;
 
+// 只要刷新页面就要执行
 setInerval();
 
+// 判断是否要周期执行
 function setInerval() {
 	var intId = sessionStorage.getItem('intervalID');
-	console.info("intId:" + intId);
 	if (intId != null) {
 		interval();
 	}
 }
 
+// 周期执行
 function interval() {
-	console.info("IntervalID:" + intervalID);
 	intervalID = window.clearInterval(intervalID);
 	intervalID = window.setInterval(callBackExportStatus, 1000);
-	return intervalID;
+	sessionStorage.setItem('intervalID', intervalID);
 }
 
+// 精灵导出
 function exportZip() {
 	var xmlhttp;
-	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+	if (window.XMLHttpRequest) {
+		// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp = new XMLHttpRequest();
-	} else {// code for IE6, IE5
+	} else {
+		// code for IE6, IE5
 		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 	}
+	// 发送导出请求
 	xmlhttp.open("POST", "/example/SmartExportServlet", true);
 	xmlhttp.send();
-	var intId = interval();
-	sessionStorage.setItem('intervalID', intId);
+	// 周期执行
+	interval();
 }
 
-function isComplete() {
-	complete();
-}
-
-/**
- * @returns {___anonymous359_365}
- */
+// xmlhttp
 function GetXmlHttpObject() {
 	var xmlHttp = null;
 	try {
@@ -53,22 +53,19 @@ function GetXmlHttpObject() {
 	return xmlHttp;
 }
 
+// 导出结果
 function callBackExportStatus() {
 	try {
 		var xmlHttp = GetXmlHttpObject();
 		if (xmlHttp != null) {
-			// 构造查询连接字符串
+			// 取得导出结果
 			var url = "/example/SmartExportServlet";
-			// 打开连接
 			xmlHttp.open("GET", url, true);
-			// 设置回调函数
 			xmlHttp.onreadystatechange = function() {
 				try {
 					if (xmlHttp.readyState == 4) {
 						var status = xmlHttp.responseText;
-						console.info("status: " + status);
 						if ("1" == status) {
-							// exportNociceVar.show();
 							complete();
 							console.info("Resopne Complete : " + status);
 							window.clearInterval(intervalID);
