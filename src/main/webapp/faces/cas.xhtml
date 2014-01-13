@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core" 
+	template="/faces/template.xhtml">
+	<ui:define name="title"> hello cas</ui:define>
+	<ui:define name="content">
+		<h:form id="form">
+			<p:commandButton id="downloadLink" value="Download" ajax="false"
+				onclick="PrimeFaces.monitorDownload(start, stop)"
+				icon="ui-icon-arrowthichk-s">
+				<p:fileDownload value="#{compressBean.compress()}" />
+			</p:commandButton>
+			<h:outputLabel value="CreationTime" />
+			<h:outputText
+				value="#{facesContext.externalContext.getSession(true).creationTime}">
+				<f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" timeZone="GMT+8" />
+			</h:outputText>
+			<h:outputLabel value="MaxInactiveInterval" />
+			<h:outputText
+				value="#{facesContext.externalContext.getSession(true).maxInactiveInterval}">
+			</h:outputText>
+			<h:outputLabel value="User" />
+			<h:inputText value="#{loginBean.user}" />
+			<h:commandButton value="logout" action="#{loginBean.logout()}" />
+			<p:commandButton value="logout" action="#{loginBean.logout()}"
+				update=":form" />
+		</h:form>
+	</ui:define>
+</ui:composition>

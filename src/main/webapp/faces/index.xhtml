@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core" template="/faces/template.xhtml">
+	<ui:define name="title"> hello example</ui:define>
+	<ui:define name="content">
+		<h:form id="form">
+			<p:growl id="message1" autoUpdate="true" showDetail="true" />
+			<p:commandButton id="smartExportButton" value="SmartExport"
+				oncomplete="interval();" action="#{messageBean.export()}"></p:commandButton>
+
+
+
+			<p:commandButton rendered="#{messageBean.exportButtonRender}"
+				value="send" action="#{messageBean.sendMessages()}"
+				onclick="exportZip();"></p:commandButton>
+			<p:commandButton value="showBar" type="button"
+				onclick="exportNociceVar.show();"></p:commandButton>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
