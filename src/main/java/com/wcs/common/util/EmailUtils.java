@@ -12,6 +12,14 @@ import java.util.Map;
 import com.wcs.common.util.vo.A1;
 import com.wcs.common.util.vo.SubVo;
 
+/** 
+* <p>Project: example</p> 
+* <p>Title: EmailUtils.java</p> 
+* <p>Description: </p> 
+* <p>Copyright (c) 2014 Wilmar Consultancy Services</p>
+* <p>All Rights Reserved.</p>
+* @author <a href="mailto:yuanzhencai@wcs-global.com">Yuan</a> 
+*/
 public final class EmailUtils {
 
 	private EmailUtils() {
