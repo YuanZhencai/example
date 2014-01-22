@@ -3,21 +3,11 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core" template="/faces/template.xhtml">
+	xmlns:f="http://java.sun.com/jsf/core" 	template="/template/template.xhtml">
 	<ui:define name="title"> hello example</ui:define>
 	<ui:define name="content">
 		<h:form id="form">
-			<p:growl id="message1" autoUpdate="true" showDetail="true" />
-			<p:commandButton id="smartExportButton" value="SmartExport"
-				oncomplete="interval();" action="#{messageBean.export()}"></p:commandButton>
-
-
-			<p:commandButton rendered="#{messageBean.exportButtonRender}"
-				value="send" action="#{messageBean.sendMessages()}"
-				onclick="exportZip();"></p:commandButton>
-			<p:commandButton value="showBar" type="button"
-				onclick="exportNociceVar.show();"></p:commandButton>
-
+			hello example
 		</h:form>
 	</ui:define>
 </ui:composition>

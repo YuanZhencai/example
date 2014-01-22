@@ -15,12 +15,25 @@ function setInerval() {
 // 周期执行
 function interval() {
 	intervalID = window.clearInterval(intervalID);
-	intervalID = window.setInterval(callBackExportStatus, 1000);
+	intervalID = window.setInterval(getExportStatus, 1000);
 	sessionStorage.setItem('intervalID', intervalID);
 }
 
+function getExportStatus() {
+	exportStatus();
+}
+
+function stopInterval(xhr, status, args) {
+	console.info("stopInterval");
+	if (args.status == "1") {
+		window.clearInterval(intervalID);
+		sessionStorage.clear();
+		exportNociceVar.show();
+		console.info("success");
+	}
+}
 // 精灵导出
-function exportZip() {
+function exportSmarts() {
 	var xmlhttp;
 	if (window.XMLHttpRequest) {
 		// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -30,7 +43,9 @@ function exportZip() {
 		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 	}
 	// 发送导出请求
-	xmlhttp.open("POST", "/example/SmartExportServlet", true);
+	var contextPath = $("#requestContextPath").val();
+	var url = contextPath + "/SmartExportServlet";
+	xmlhttp.open("POST", url, true);
 	xmlhttp.send();
 	// 周期执行
 	interval();
@@ -59,14 +74,16 @@ function callBackExportStatus() {
 		var xmlHttp = GetXmlHttpObject();
 		if (xmlHttp != null) {
 			// 取得导出结果
-			var url = "/example/SmartExportServlet";
+			var contextPath = $("#requestContextPath").val();
+			var url = contextPath + "/SmartExportServlet";
 			xmlHttp.open("GET", url, true);
 			xmlHttp.onreadystatechange = function() {
 				try {
 					if (xmlHttp.readyState == 4) {
 						var status = xmlHttp.responseText;
-						if ("1" == status) {
-							complete();
+						if ("1" == status || "0" == status) {
+							// complete();
+							exportNociceVar.show();
 							console.info("Resopne Complete : " + status);
 							window.clearInterval(intervalID);
 							sessionStorage.clear();
