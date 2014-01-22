@@ -76,7 +76,7 @@
 	</build>
 	<scm>
 	    <connection>
-	        scm:git:git://github.com:YuanZhencai/example.git
+	        scm:git:https://github.com/YuanZhencai/example
 	    </connection>
 	</scm>
 </project>
