@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.wcs</groupId>
 	<artifactId>example</artifactId>
-	<version>1.2.0</version>
+	<version>1.2.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>example</name>
 	<description>example</description>
@@ -121,6 +121,6 @@
 	<scm>
 		<connection>scm:git:git://github.com/YuanZhencai/example.git</connection>
 		<url>scm:git:git://github.com/YuanZhencai/example.git</url>
-		<developerConnection>scm:git:git://github.com/YuanZhencai/example.git</developerConnection>
+		<developerConnection>scm:git:git@github.com:YuanZhencai/example.git</developerConnection>
 	</scm>
 </project>
