@@ -119,8 +119,8 @@
 		</resources>
 	</build>
 	<scm>
-		<connection>scm:git:https://github.com/YuanZhencai/example</connection>
-		<url>scm:git:https://github.com/YuanZhencai/example</url>
-		<developerConnection>scm:git:https://github.com/YuanZhencai/example</developerConnection>
+		<connection>scm:git:git://github.com/YuanZhencai/example.git</connection>
+		<url>scm:git:git://github.com/YuanZhencai/example.git</url>
+		<developerConnection>scm:git:git://github.com/YuanZhencai/example.git</developerConnection>
 	</scm>
 </project>
