@@ -10,6 +10,7 @@ public class SingletonTest {
 		Singleton1.getInstance().mode();
 		Singleton2.getInstance().mode();
 		Singleton3.getInstance().mode();
+		Singleton4.getInstance().mode();
 	}
 
 }
