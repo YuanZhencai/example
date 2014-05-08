@@ -4,6 +4,103 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 	<display-name>example</display-name>
+	<context-param>
+		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+		<param-value>server</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>org.apache.myfaces.SERIALIZE_STATE_IN_SESSION</param-name>
+		<param-value>false</param-value>
+	</context-param>
+
+
+<filter>
+   <filter-name>CAS Authentication Filter</filter-name>
+   <filter-class>
+    org.jasig.cas.client.authentication.AuthenticationFilter
+   </filter-class>
+   <init-param>
+    <param-name>casServerLoginUrl</param-name>
+    <param-value>
+    https://yuan.wcs-global.com:8181/cas/login
+    </param-value>
+   </init-param>
+   <init-param>
+    <param-name>renew</param-name>
+    <param-value>false</param-value>
+   </init-param>
+   <init-param>
+    <param-name>gateway</param-name>
+    <param-value>false</param-value>
+   </init-param>
+   <init-param>
+    <param-name>serverName</param-name>
+    <param-value>http://yuan.wcs-global.com:8080</param-value>
+   </init-param>
+</filter>
+<filter>
+   <filter-name>CAS Validation Filter</filter-name>
+   <filter-class>
+    org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter
+   </filter-class>
+   <init-param>
+    <param-name>casServerUrlPrefix</param-name>
+    <param-value>https://yuan.wcs-global.com:8181/cas</param-value>
+   </init-param>
+   <init-param>
+    <param-name>serverName</param-name>
+    <param-value>http://yuan.wcs-global.com:8080</param-value>
+   </init-param>
+   <init-param>
+    <param-name>useSession</param-name>
+    <param-value>true</param-value>
+   </init-param>
+   <init-param>
+    <param-name>redirectAfterValidation</param-name>
+    <param-value>true</param-value>
+   </init-param>
+</filter>
+<filter>
+   <filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>
+   <filter-class>
+    org.jasig.cas.client.util.HttpServletRequestWrapperFilter
+   </filter-class>
+</filter>
+<filter>
+   <filter-name>CAS Assertion Thread Local Filter</filter-name>
+   <filter-class>
+    org.jasig.cas.client.util.AssertionThreadLocalFilter
+   </filter-class>
+</filter>
+<!-- <filter>
+        <filter-name>loginFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>targetFilterLifecycle</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter> -->
+    <filter-mapping>
+   <filter-name>CAS Authentication Filter</filter-name>
+   <url-pattern>/faces/*</url-pattern>
+</filter-mapping>
+
+<filter-mapping>
+   <filter-name>CAS Validation Filter</filter-name>
+   <url-pattern>/faces/*</url-pattern>
+</filter-mapping>
+
+<filter-mapping>
+   <filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>
+   <url-pattern>/faces/*</url-pattern>
+</filter-mapping>
+
+<filter-mapping>
+   <filter-name>CAS Assertion Thread Local Filter</filter-name>
+   <url-pattern>/faces/*</url-pattern>
+</filter-mapping>
+	
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -16,6 +113,9 @@
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
+	<session-config>
+	    <session-timeout>1</session-timeout>
+	</session-config>
 	<error-page>
 		<exception-type>javax.faces.application.ViewExpiredException</exception-type>
 		<location>/logout.jsp</location>
